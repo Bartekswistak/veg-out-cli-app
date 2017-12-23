@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/enviro"
+
+VegOut::CLI.new.call
