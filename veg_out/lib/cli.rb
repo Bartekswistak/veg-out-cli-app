@@ -4,7 +4,7 @@ class VegOut::CLI
     puts ""
     puts "                    Welcome to Veg Out   "
     puts "                    ------------------   "
-    puts "The best place to find nearby vegan and vegetarian restaurants!!"
+    puts "The best place to find vegan and vegetarian restaurants in your area!!"
     puts ""
   end
 
