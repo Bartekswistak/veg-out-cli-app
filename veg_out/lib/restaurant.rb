@@ -1,5 +1,5 @@
 
-class VegOut::Restaurant
+class Restaurant
   attr_accessor :name, :distance, :address, :phone, :description
 
   @@all = []
