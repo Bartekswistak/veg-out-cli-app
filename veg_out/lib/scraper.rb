@@ -7,11 +7,19 @@ require_relative './restaurant.rb'
 
 
 class Scraper
-  html = open("https://www.happycow.net/searchmap?lat=&lng=&location=34293")
-  doc = Nokogiri::HTML(html)
+
+    url = "https://www.happycow.net/searchmap?lat=&lng=&location="
+    puts "Please enter your 5 digit zip code:"
+    input = gets.strip
+    url << input.to_s
+    html = open(url)
+    doc = Nokogiri::HTML(html)
 
 
-binding.pry  
+
+
+
+binding.pry
 
 
 
