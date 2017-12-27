@@ -15,13 +15,11 @@ class Scraper
     html = open(url)
     doc = Nokogiri::HTML(html)
 
-
-
+    restaurants = doc.css("h5").map {|name| name.text}.uniq
+    distance = doc.css("span.distance").map {|howfar| howfar.text}.uniq
+    address = doc.css("div.details").children.css("p").map {|location| location.text}
 
 
 binding.pry
-
-
-
 
 end
