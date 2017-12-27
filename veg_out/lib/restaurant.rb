@@ -1,6 +1,8 @@
 
-class Restaurant
+class VegOut::Restaurant
   attr_accessor :name, :distance, :address, :phone, :description
+
+  @@all = []
 
 
   def initialize(name, distance, address, phone)

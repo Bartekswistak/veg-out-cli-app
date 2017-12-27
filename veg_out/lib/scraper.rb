@@ -4,9 +4,7 @@ require 'open-uri'
 
 require_relative './restaurant.rb'
 
-
-
-class Scraper
+class VegOut::Scraper 
 
     url = "https://www.happycow.net/searchmap?lat=&lng=&location="
     puts "Please enter your 5 digit zip code:"
