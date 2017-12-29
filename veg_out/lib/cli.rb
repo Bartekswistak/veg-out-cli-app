@@ -59,9 +59,7 @@ class VegOut::CLI
 
   def show_addresses
     address = @doc.css("div.details").children.css("p").map {|location| location.text}
-    address.each_with_index.map {|n, i| puts "#{i + 1}. #{n}"}
+      address.each_with_index.map {|n, i| puts "#{i + 1}. #{n}"}
     more_info
   end
-
-
 end
