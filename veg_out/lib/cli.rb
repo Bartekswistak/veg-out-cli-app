@@ -25,9 +25,8 @@ class VegOut::CLI
   end
 
   def show_restaurants
-      @restaurants = @doc.css("h5").map {|name| name.text}.uniq
-      @distance = @doc.css("span.distance").map {|howfar| howfar.text}.uniq
-
+    @restaurants = @doc.css("h5").map {|name| name.text}.uniq
+    @distance = @doc.css("span.distance").map {|howfar| howfar.text}.uniq
       if @restaurants == [ ]
         puts "No nearby restaurants! Sorry!"
         start
@@ -39,24 +38,24 @@ class VegOut::CLI
 
 
   def more_info
-        puts ""
-        puts "For more information, enter: locations, restaurants, start over or quit"
-          input = gets.strip
-          case input
-          when "start over"
-             start
-           when "locations"
-             show_addresses
-           when "restaurants"
-             show_restaurants
-           when "quit"
-             exit
-           else
-             puts ""
-             puts "Not a valid choice"
-             more_info
-          end
-  end
+    puts ""
+    puts "For more information, enter: locations, restaurants, start over or quit"
+      input = gets.strip
+        case input
+        when "start over"
+           start
+        when "locations"
+           show_addresses
+        when "restaurants"
+           show_restaurants
+        when "quit"
+           exit
+        else
+           puts ""
+           puts "Not a valid choice"
+           more_info
+        end
+    end
 
   def show_addresses
     address = @doc.css("div.details").children.css("p").map {|location| location.text}
