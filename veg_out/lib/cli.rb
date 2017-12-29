@@ -27,5 +27,15 @@ class VegOut::CLI
       @restaurants = @doc.css("h5").map {|name| name.text}.uniq
         @restaurants.each_with_index.map {|n, i| puts "#{i + 1}. #{n}"}
       @restaurants
+      puts "For more information on a restaurant, type its number or type restart to start over:"
+    input = gets.strip
+    case input
+    when "restart"
+      start
+    end
+
+
   end
+
+
 end
