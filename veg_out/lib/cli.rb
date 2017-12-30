@@ -18,9 +18,7 @@ class VegOut::CLI
     puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
     input = gets.strip.to_s
-    url = "https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"
-    html = open(url)
-    @doc = Nokogiri::HTML(html)
+    @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"))
     show_restaurants
   end
 
