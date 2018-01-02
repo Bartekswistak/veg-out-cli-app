@@ -2,6 +2,8 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 
+require_relative "./veg_out/version"
+
 
 class VegOut::CLI
 
@@ -37,7 +39,7 @@ class VegOut::CLI
 
   def more_info
     puts ""
-    puts "For more information on restaurant, type 'deets' "
+    puts "For more information on a restaurant, type 'deets' "
     puts "Or to start over type 'back' or type 'quit' to exit "
     puts ""
       input = gets.strip
@@ -51,7 +53,7 @@ class VegOut::CLI
           when "quit"
              exit
           when "deets"
-             show_details[0]
+             show_details
           else
              puts ""
              puts "Not a valid choice"
@@ -100,9 +102,11 @@ class VegOut::CLI
       scrape_details_page
 end
 
-    def show_details    # not working yet 
+    def show_details    # not working yet
+      puts "Which restaurant are you interested in learing more about:"
       input = gets.strip.to_i
-      @site = Nokogiri::HTML(open(@base_url << @details["#{input}".to_i - 1]))
-      @site.css("div.venue__description.mb--3").children.css("p").text
+      @site = @base_url << @details["#{input}".to_i - 1].to_s
+      deets = Nokogiri::HTML(open(@site))
+      deets.css("div.venue__description.mb--3").children.css("p").text
     end
 end
