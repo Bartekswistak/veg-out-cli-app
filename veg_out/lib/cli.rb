@@ -48,6 +48,8 @@ class VegOut::CLI
            show_restaurants
         when "quit"
            exit
+         when "1..25"
+           open_details_page
         else
            puts ""
            puts "Not a valid choice"
@@ -60,4 +62,12 @@ class VegOut::CLI
       address.each_with_index.map {|n, i| puts "#{i + 1}. #{n}"}
     more_info
   end
+
+  def open_details_page
+    details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
+    site = "happycow.net"
+
+
+  end
+
 end
