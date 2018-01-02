@@ -42,21 +42,21 @@ class VegOut::CLI
     puts ""
       input = gets.strip
         case input
-        when "back"
-           start
-#        when "locations"
-#           show_addresses
-#        when "restaurants"
-#           show_restaurants
-        when "quit"
-           exit
-        when "deets"
-           scrape_details_page
-        else
-           puts ""
-           puts "Not a valid choice"
-           more_info
-        end
+          when "back"
+             start
+  #        when "locations"
+  #           show_addresses
+  #        when "restaurants"
+  #           show_restaurants
+          when "quit"
+             exit
+          when "deets"
+             scrape_details_page
+          else
+             puts ""
+             puts "Not a valid choice"
+             more_info
+          end
     end
 
 #   def show_addresses
@@ -67,26 +67,34 @@ class VegOut::CLI
 
   def scrape_details_page
     details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
-#    list_urls = details.each_with_index.map {|n, i| "#{i + 1}. #{n}"}
-#    site = Nokogiri::HTML(open("happycow.net"))
+    list_urls = details.each_with_index.map {|n, i| "#{i + 1}. #{n}"}
+    base_url = "https://www.happycow.net"
+    site = Nokogiri::HTML(open("https://www.happycow.net"))
 
+    # The idea here is take user input, and take the appropriate link from details
+    # and add it to the base site variable, from there more details will be scraped and displayed.
+
+    puts ""
     puts "Enter the number of the restaurant you would like more info on:"
     puts "To go back, type back or type quit to exit"
     puts ""
+
     input = gets.strip
-    case input
-    when "1"
-      puts ""
-      puts "more info on 1"
-    when "back"
-      show_restaurants
-    when "quit"
-      exit
-    else
-      puts ""
-      puts "Invalid choice"
-    end
-    scrape_details_page
+    case input.to_i
+    when 1..26         #method not working properly yet
+          puts ""
+          puts base_url << details[input.to_i - 1]
+          puts ""
+#      when "back"
+#          show_restaurants
+#      when "quit"
+#          exit
+      else
+          puts ""
+          puts "Invalid choice!"
+          puts ""
+      end
+      scrape_details_page
 end
 
 end
