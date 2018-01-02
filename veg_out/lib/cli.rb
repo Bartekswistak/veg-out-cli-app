@@ -42,13 +42,13 @@ class VegOut::CLI
         case input
         when "start over"
            start
-        when "locations"
-           show_addresses
-        when "restaurants"
-           show_restaurants
+#        when "locations"
+#           show_addresses
+#        when "restaurants"
+#           show_restaurants
         when "quit"
            exit
-         when "1..25"
+        when "deets"
            open_details_page
         else
            puts ""
@@ -57,17 +57,20 @@ class VegOut::CLI
         end
     end
 
-  def show_addresses
-    address = @doc.css("div.details").children.css("p").map {|location| location.text}
-      address.each_with_index.map {|n, i| puts "#{i + 1}. #{n}"}
-    more_info
-  end
+#   def show_addresses
+#    address = @doc.css("div.details").children.css("p").map {|location| location.text}
+#      address.each_with_index.map {|n, i| puts "#{i + 1}. #{n}"}
+#    more_info
+# end
 
   def open_details_page
-    details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
+    details_arr = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
+    list_urls = details_arr.each_with_index.map {|n, i| "#{i + 1}. #{n}"}
     site = "happycow.net"
-
 
   end
 
-end
+
+
+
+  end
