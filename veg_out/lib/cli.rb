@@ -37,10 +37,12 @@ class VegOut::CLI
 
   def more_info
     puts ""
-    puts "For more information, enter: locations, restaurants, start over or quit"
+    puts "For more information on restaurant, type 'deets' "
+    puts "Or to start over type 'back' or type 'quit' to exit "
+    puts ""
       input = gets.strip
         case input
-        when "start over"
+        when "back"
            start
 #        when "locations"
 #           show_addresses
@@ -49,7 +51,7 @@ class VegOut::CLI
         when "quit"
            exit
         when "deets"
-           open_details_page
+           scrape_details_page
         else
            puts ""
            puts "Not a valid choice"
@@ -63,14 +65,28 @@ class VegOut::CLI
 #    more_info
 # end
 
-  def open_details_page
-    details_arr = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
-    list_urls = details_arr.each_with_index.map {|n, i| "#{i + 1}. #{n}"}
-    site = "happycow.net"
+  def scrape_details_page
+    details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
+#    list_urls = details.each_with_index.map {|n, i| "#{i + 1}. #{n}"}
+#    site = Nokogiri::HTML(open("happycow.net"))
 
-  end
+    puts "Enter the number of the restaurant you would like more info on:"
+    puts "To go back, type back or type quit to exit"
+    puts ""
+    input = gets.strip
+    case input
+    when "1"
+      puts ""
+      puts "more info on 1"
+    when "back"
+      show_restaurants
+    when "quit"
+      exit
+    else
+      puts ""
+      puts "Invalid choice"
+    end
+    scrape_details_page
+end
 
-
-
-
-  end
+end
