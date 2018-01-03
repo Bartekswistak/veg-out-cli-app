@@ -16,6 +16,8 @@ class VegOut::CLI
     start
   end
 
+  # Takes the user input of either zip code or city/st or address and inserts into the url after the location tag
+
   def start
     puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
@@ -23,6 +25,9 @@ class VegOut::CLI
     @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"))
     show_restaurants
   end
+
+  # This method scrapes the results page and gets an array of restaurants, then iterates over the array
+  # and returns a numbered list with the distance from the location given.
 
   def show_restaurants
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
@@ -38,6 +43,7 @@ class VegOut::CLI
     end
   end
 
+  # This method takes user input to show more details of a specific restaurant or give options to navigate elsewhere.
 
   def more_info
     puts ""
@@ -62,7 +68,6 @@ class VegOut::CLI
           end
     end
 
-
     # The idea here is take user input, and take the appropriate link from details
     # and add it to the base site variable, from there more details will be scraped and displayed.
 
@@ -76,7 +81,7 @@ class VegOut::CLI
       deets = Nokogiri::HTML(open(site))
 
         puts ""
-        puts deets.css("h1.header__title").text
+        puts deets.css("h1.header__title").text 
         puts ""
         puts deets.css("div.venue__description.mb--3").children.css("p").text
         puts ""
@@ -85,7 +90,6 @@ class VegOut::CLI
         puts ""
         puts "Location:"
         puts deets.css("p.icon__text__desc").text.strip
-        puts ""
         puts ""
         more_info
       end
