@@ -31,6 +31,8 @@ class VegOut::CLI
         puts "No nearby restaurants! Sorry!"
         start
       else
+        puts "Here are places with options to eat near you!!"
+        puts ""
         @restaurants.each_with_index.map {|n, index| puts "#{index + 1}. #{n} -- #{@distance[index]} away"}
       more_info
     end
@@ -68,9 +70,9 @@ class VegOut::CLI
 # end
 
   def scrape_details_page
-    @details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
+#    @details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
     # list_urls = details.each_with_index.map {|n, i| "#{i + 1}. #{n}"}
-    @base_url = "https://www.happycow.net"
+#    @base_url = "https://www.happycow.net"
 
     # The idea here is take user input, and take the appropriate link from details
     # and add it to the base site variable, from there more details will be scraped and displayed.
@@ -104,9 +106,22 @@ end
 
     def show_details    # not working yet
       puts "Which restaurant are you interested in learing more about:"
-      input = gets.strip.to_i
-      @site = @base_url << @details["#{input}".to_i - 1].to_s
+      @info = gets.strip.to_i
+      @details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
+      @base_url = "https://www.happycow.net"
+
+      @site = @base_url << @details[@info-1].to_s
       deets = Nokogiri::HTML(open(@site))
-      deets.css("div.venue__description.mb--3").children.css("p").text
+      puts ""
+      puts deets.css("h1.header__title").text
+      puts ""
+      puts deets.css("div.venue__description.mb--3").children.css("p").text
+      puts ""
+      puts "Contact Info:"
+      puts deets.css("div.icon__text").children.css("span").first.text
+      puts ""
+      puts "Location:"
+      puts deets.css("p.icon__text__desc").text.strip
+      puts ""
     end
 end

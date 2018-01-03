@@ -6,7 +6,7 @@ require_relative './restaurant.rb'
 
 class Scraper
 
-    url = "https://www.happycow.net/searchmap?kw=&location=34293&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"
+    url = "https://www.happycow.net/reviews/mango-bistro-englewood-36923"
     html = open(url)
     doc = Nokogiri::HTML(html)
 
