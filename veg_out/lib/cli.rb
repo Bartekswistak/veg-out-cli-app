@@ -41,8 +41,9 @@ class VegOut::CLI
 
   def more_info
     puts ""
-    puts "For more information on a restaurant, type 'deets' "
-    puts "Or to start over type 'back' or type 'quit' to exit "
+    puts "For more information on a restaurant, type 'more' "
+    puts "If you would like to see the list of restaurants again type 'list'"
+    puts "Or to search a new area type 'back' or type 'quit' to exit "
     puts ""
       input = gets.strip
         case input
@@ -50,8 +51,10 @@ class VegOut::CLI
              start
           when "quit"
              exit
-          when "deets"
+          when "more"
              show_details
+           when "list"
+             show_restaurants
           else
              puts ""
              puts "Not a valid choice"
@@ -63,24 +66,27 @@ class VegOut::CLI
     # The idea here is take user input, and take the appropriate link from details
     # and add it to the base site variable, from there more details will be scraped and displayed.
 
-    def show_details    # not working yet
+    def show_details
       puts "Which restaurant are you interested in learing more about:"
       @info = gets.strip.to_i
-      @details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
-      @base_url = "https://www.happycow.net"
+      details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
+      base_url = "https://www.happycow.net"
 
-      @site = @base_url << @details[@info-1].to_s
-      deets = Nokogiri::HTML(open(@site))
-      puts ""
-      puts deets.css("h1.header__title").text
-      puts ""
-      puts deets.css("div.venue__description.mb--3").children.css("p").text
-      puts ""
-      puts "Contact Info:"
-      puts deets.css("div.icon__text").children.css("span").first.text
-      puts ""
-      puts "Location:"
-      puts deets.css("p.icon__text__desc").text.strip
-      puts ""
-    end
+      site = base_url << details[@info-1].to_s
+      deets = Nokogiri::HTML(open(site))
+
+        puts ""
+        puts deets.css("h1.header__title").text
+        puts ""
+        puts deets.css("div.venue__description.mb--3").children.css("p").text
+        puts ""
+        puts "Contact Info:"
+        puts deets.css("div.icon__text").children.css("span").first.text
+        puts ""
+        puts "Location:"
+        puts deets.css("p.icon__text__desc").text.strip
+        puts ""
+        puts ""
+        more_info
+      end
 end
