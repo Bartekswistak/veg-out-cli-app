@@ -5,7 +5,6 @@ require 'open-uri'
 require_relative "./veg_out/version"
 require_relative "./scraper"
 
-
 class VegOut::CLI
   include VegOut::Scraper
 
@@ -39,8 +38,8 @@ class VegOut::CLI
       else
         puts "Here are places with options to eat near you!!"
         puts ""
-          show_list
-          more_info
+      show_list
+      more_info
       end
   end
 
@@ -74,8 +73,8 @@ class VegOut::CLI
 
     def show_details
       puts "Which restaurant are you interested in learing more about:"
-        find_details_page
-        more_details
-        more_info
+      find_details_page
+      more_details
+      more_info
     end
 end

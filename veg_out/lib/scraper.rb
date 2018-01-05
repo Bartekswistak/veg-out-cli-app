@@ -43,5 +43,4 @@ module VegOut::Scraper
     puts @deets.css("p.icon__text__desc").text.strip
     puts ""
   end
-
 end
