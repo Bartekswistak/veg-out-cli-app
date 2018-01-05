@@ -3,9 +3,11 @@ require 'nokogiri'
 require 'open-uri'
 
 require_relative "./veg_out/version"
+require_relative "./scraper"
 
 
 class VegOut::CLI
+  include VegOut::Scraper
 
   def call
     puts ""
@@ -21,8 +23,7 @@ class VegOut::CLI
   def start
     puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
-    input = gets.strip.to_s
-    @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"))
+    get_page
     show_restaurants
   end
 
@@ -81,7 +82,7 @@ class VegOut::CLI
       deets = Nokogiri::HTML(open(site))
 
         puts ""
-        puts deets.css("h1.header__title").text 
+        puts deets.css("h1.header__title").text
         puts ""
         puts deets.css("div.venue__description.mb--3").children.css("p").text
         puts ""

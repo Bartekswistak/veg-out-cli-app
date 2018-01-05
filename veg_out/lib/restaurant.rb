@@ -5,11 +5,12 @@ class Restaurant
   @@all = []
 
 
-  def initialize(name, distance, address, phone)
+  def initialize(name, distance, address, phone, description)
     @name = name
     @distance = distance
     @address = address
     @phone = phone
+    @description = description
   end
 
 

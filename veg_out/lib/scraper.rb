@@ -3,14 +3,14 @@ require 'nokogiri'
 require 'open-uri'
 
 require_relative './restaurant.rb'
+require_relative './cli.rb'
+require_relative './enviro.rb'
 
-class Scraper
+module VegOut::Scraper
 
-    url = "https://www.happycow.net/reviews/mango-bistro-englewood-36923"
-    html = open(url)
-    doc = Nokogiri::HTML(html)
-
-
-binding.pry
+  def get_page
+    input = gets.strip.to_s
+    @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"))
+  end
 
 end
