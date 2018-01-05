@@ -8,7 +8,7 @@ require_relative "./scraper"
 
 class VegOut::CLI
   include VegOut::Scraper
-  
+
 
   def call
     puts ""
@@ -74,24 +74,8 @@ class VegOut::CLI
 
     def show_details
       puts "Which restaurant are you interested in learing more about:"
-      @info = gets.strip.to_i
-      details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
-      base_url = "https://www.happycow.net"
-
-      site = base_url << details[@info-1].to_s
-      deets = Nokogiri::HTML(open(site))
-
-        puts ""
-        puts deets.css("h1.header__title").text
-        puts ""
-        puts deets.css("div.venue__description.mb--3").children.css("p").text
-        puts ""
-        puts "Contact Info:"
-        puts deets.css("div.icon__text").children.css("span").first.text
-        puts ""
-        puts "Location:"
-        puts deets.css("p.icon__text__desc").text.strip
-        puts ""
+        find_details_page
+        more_details
         more_info
-      end
+    end
 end

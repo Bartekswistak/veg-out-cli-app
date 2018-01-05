@@ -22,4 +22,26 @@ module VegOut::Scraper
     @restaurants.each_with_index.map {|n, index| puts "#{index + 1}. #{n} -- #{@distance[index]} away"}
   end
 
+  def find_details_page
+    @info = gets.strip.to_i
+    details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
+    base_url = "https://www.happycow.net"
+    site = base_url << details[@info-1].to_s
+    @deets = Nokogiri::HTML(open(site))
+  end
+
+  def more_details
+    puts ""
+    puts @deets.css("h1.header__title").text
+    puts ""
+    puts @deets.css("div.venue__description.mb--3").children.css("p").text
+    puts ""
+    puts "Contact Info:"
+    puts @deets.css("div.icon__text").children.css("span").first.text
+    puts ""
+    puts "Location:"
+    puts @deets.css("p.icon__text__desc").text.strip
+    puts ""
+  end
+
 end
