@@ -8,6 +8,7 @@ require_relative "./scraper"
 
 class VegOut::CLI
   include VegOut::Scraper
+  
 
   def call
     puts ""
@@ -31,17 +32,16 @@ class VegOut::CLI
   # and returns a numbered list with the distance from the location given.
 
   def show_restaurants
-    @restaurants = @doc.css("h5").map {|name| name.text}.uniq
-    @distance = @doc.css("span.distance").map {|howfar| howfar.text}.uniq
+    scrape_results
       if @restaurants == [ ]
         puts "No nearby restaurants! Sorry!"
         start
       else
         puts "Here are places with options to eat near you!!"
         puts ""
-        @restaurants.each_with_index.map {|n, index| puts "#{index + 1}. #{n} -- #{@distance[index]} away"}
-      more_info
-    end
+          show_list
+          more_info
+      end
   end
 
   # This method takes user input to show more details of a specific restaurant or give options to navigate elsewhere.
