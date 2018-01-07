@@ -8,11 +8,11 @@ require_relative "./scraper"
 class VegOut::CLI
   include VegOut::Scraper
 
-
   def call
-    puts ""
+    puts "                    ------------------   "
     puts "                    Welcome to Veg Out   "
     puts "                    ------------------   "
+    puts ""
     puts "The best place to find vegan and vegetarian restaurants!!"
     puts ""
     start
