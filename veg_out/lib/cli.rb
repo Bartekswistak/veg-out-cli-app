@@ -23,6 +23,7 @@ class VegOut::CLI
   def start
     puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
+    puts ""
     get_page
     show_restaurants
   end
@@ -33,11 +34,14 @@ class VegOut::CLI
   def show_restaurants
     scrape_results
       if @restaurants == [ ]
+        puts ""
         puts "No nearby restaurants! Sorry!"
+        puts ""
         start
       else
+        puts "-----------------------------------------------"
         puts "Here are places with options to eat near you!!"
-        puts ""
+        puts "-----------------------------------------------"
       show_list
       more_info
       end
@@ -64,6 +68,7 @@ class VegOut::CLI
           else
              puts ""
              puts "Not a valid choice"
+             puts ""
              more_info
           end
     end
@@ -72,7 +77,9 @@ class VegOut::CLI
     # and add it to the base site variable, from there more details will be scraped and displayed.
 
     def show_details
-      puts "Which restaurant are you interested in learing more about:"
+      puts ""
+      puts "Which restaurant are you interested in learning more about:"
+      puts ""
       find_details_page
       more_details
       more_info
