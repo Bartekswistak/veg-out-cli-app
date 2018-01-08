@@ -6,8 +6,6 @@ require_relative "./veg_out/version"
 require_relative "./scraper"
 
 class VegOut::CLI
-  include VegOut::Scraper
-
 
   def call
     puts ""
@@ -23,7 +21,7 @@ class VegOut::CLI
   def start
     puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
-    get_page
+    VegOut::Scraper.get_page
     show_restaurants
   end
 
@@ -31,14 +29,14 @@ class VegOut::CLI
   # and returns a numbered list with the distance from the location given.
 
   def show_restaurants
-    scrape_results
+    VegOut::Scraper.scrape_results
       if @restaurants == [ ]
         puts "No nearby restaurants! Sorry!"
         start
       else
         puts "Here are places with options to eat near you!!"
         puts ""
-      show_list
+      VegOut::Scraper.show_list
       more_info
       end
   end
@@ -73,8 +71,8 @@ class VegOut::CLI
 
     def show_details
       puts "Which restaurant are you interested in learing more about:"
-      find_details_page
-      more_details
+      VegOut::Scraper.find_details_page
+      VegOut::Scraper.more_details
       more_info
     end
 end

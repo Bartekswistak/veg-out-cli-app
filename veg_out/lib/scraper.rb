@@ -6,23 +6,23 @@ require_relative './restaurant.rb'
 require_relative './cli.rb'
 require_relative './enviro.rb'
 
-module VegOut::Scraper
+class VegOut::Scraper
 
-  def get_page
+  def self.get_page
     input = gets.strip.to_s
     @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"))
   end
 
-  def scrape_results
+  def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
     @distance = @doc.css("span.distance").map {|howfar| howfar.text}.uniq
   end
 
-  def show_list
-    @restaurants.each_with_index.map {|n, index| puts "#{index + 1}. #{n} -- #{@distance[index]} away"}
+  def self.show_list
+    @restaurants.each.with_index(1).map {|n, index| puts "#{index}. #{n} -- #{@distance[index]} away"}
   end
 
-  def find_details_page
+  def self.find_details_page
     @info = gets.strip.to_i
     details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
     base_url = "https://www.happycow.net"
@@ -30,7 +30,7 @@ module VegOut::Scraper
     @deets = Nokogiri::HTML(open(site))
   end
 
-  def more_details
+  def self.more_details
     puts ""
     puts @deets.css("h1.header__title").text
     puts ""
