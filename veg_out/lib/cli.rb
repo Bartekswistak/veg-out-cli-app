@@ -37,7 +37,7 @@ class VegOut::CLI
         puts "Here are places with options to eat near you!!"
         puts ""
       VegOut::Scraper.show_list
-      more_info
+      show_details
       end
   end
 
@@ -45,7 +45,6 @@ class VegOut::CLI
 
   def more_info
     puts ""
-    puts "For more information on a restaurant, type 'more' "
     puts "If you would like to see the list of restaurants again type 'list'"
     puts "Or to search a new area type 'back' or type 'quit' to exit "
     puts ""
@@ -55,8 +54,6 @@ class VegOut::CLI
              start
           when "quit"
              exit
-          when "more"
-             show_details
            when "list"
              show_restaurants
           else
@@ -70,6 +67,7 @@ class VegOut::CLI
     # and add it to the base site variable, from there more details will be scraped and displayed.
 
     def show_details
+      puts ""
       puts "Which restaurant are you interested in learing more about:"
       VegOut::Scraper.find_details_page
       VegOut::Scraper.more_details

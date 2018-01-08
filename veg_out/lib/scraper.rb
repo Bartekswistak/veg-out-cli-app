@@ -24,10 +24,15 @@ class VegOut::Scraper
 
   def self.find_details_page
     @info = gets.strip.to_i
+      if @info > @restaurants.size
+        puts "Invalid choice. Select a number from the list above:"
+        self.find_details_page
+      else
     details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
     base_url = "https://www.happycow.net"
     site = base_url << details[@info-1].to_s
     @deets = Nokogiri::HTML(open(site))
+      end
   end
 
   def self.more_details

@@ -9,5 +9,12 @@ class Restaurant
     @address = address
     @phone = phone
     @description = description
+    @@all << self
   end
+
+  def self.all
+    @@all
+  end
+
+
 end
