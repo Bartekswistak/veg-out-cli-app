@@ -19,7 +19,7 @@ module VegOut::Scraper
   end
 
   def show_list
-    @restaurants.each_with_index.map {|n, index| puts "#{index + 1}. #{n} -- #{@distance[index]} away"}
+    @restaurants.each.with_index(1).map {|n, index| puts "#{index}. #{n} -- #{@distance[index]} away"}
   end
 
   def find_details_page
