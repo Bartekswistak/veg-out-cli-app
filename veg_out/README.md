@@ -7,7 +7,7 @@ This is my first application I will be building from scratch.
 How it should work:
 
 Welcome the user to Veg Out
-Takes user input "zip code" and return a list of nearby restaurants that offer vegan/vegetarian options.
+Takes user input "zip code or city/state" and return a list of nearby restaurants that offer vegan/vegetarian options.
 Asks user if they will like more info on a listed restaurant and will list details such as description, address, phone number, etc..
 Source website I will be scraping from is HappyCow.com
 
@@ -30,7 +30,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After being greeted, user can input either city/state location or 5 digit zip code. If there are no
+restaurants in the area, user will be notified and asked for another area. Once an area has restaurants
+to show, a numbered list will be displayed with the distance from the location inputted. Next user has the options to type 'more' which will ask for the number of the restaurant user would like more info on.
+User can also type 'back' to search a new area, 'list' to show the list again of nearby restaurants or
+'quit' to exit the application. These options are available the moment of showing the list and at the moment of showing the details of a specific restaurant.
 
 ## Development
 
@@ -40,7 +44,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/<github username>/veg_out. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Bartekswistak/veg-out-cli-app This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
