@@ -26,6 +26,7 @@ class VegOut::CLI
     puts "Please enter the name of your city, or a 5 digit zip code:"
     VegOut::Scraper.get_page
     VegOut::Scraper.scrape_results
+    VegOut::Scraper.create_restaurant
   end
 
   # This method takes user input to show more details of a specific restaurant or give options to navigate elsewhere.

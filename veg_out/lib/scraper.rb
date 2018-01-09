@@ -17,18 +17,22 @@ class VegOut::Scraper
 
   def self.create_restaurant
     VegOut::Restaurant.new(
-        @doc.css("h5").map {|name| name.text}.uniq,
-        @doc.css("span.distance").map {|howfar| howfar.text}.uniq,
-        @deets.css("p.icon__text__desc").text.strip,
-        @deets.css("div.icon__text").children.css("span").first.text,
-        @deets.css("div.venue__description.mb--3").children.css("p").text
+      @name = @doc.css("h5").map {|name| name.text}.uniq,
+      @distance = @doc.css("span.distance").map {|howfar| howfar.text}.uniq,
+      @address = @deets.css("p.icon__text__desc").text.strip,
+      @phone = @deets.css("div.icon__text").children.css("span").first.text,
+      @distance = @deets.css("div.venue__description.mb--3").children.css("p").text
       )
     end
 
   def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
     @distance = @doc.css("span.distance").map {|howfar| howfar.text}.uniq
-    VegOut::Restaurant.show_restaurants
+      if @restaurants != []
+        VegOut::Restaurant.show_restaurants
+      else
+        VegOut::Restaurant.retry
+      end
   end
 
   def self.show_list

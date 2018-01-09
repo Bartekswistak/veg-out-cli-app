@@ -28,15 +28,11 @@ class VegOut::Restaurant
     @@all
   end
 
-  def self.show_restaurants
-    if @restaurants != [ ]
-        puts "Here are places with options to eat near you!!"
-        puts ""
-        VegOut::Scraper.show_list
-        VegOut::CLI.show_details
-    else
-      self.retry
-    end
+  def self.show_restaurants   
+      puts "Here are places with options to eat near you!!"
+      puts ""
+      VegOut::Scraper.show_list
+      VegOut::CLI.show_details
   end
 
   def self.retry
@@ -44,5 +40,4 @@ class VegOut::Restaurant
     puts "No nearby restaurants! Sorry!"
     VegOut::CLI.new.start
   end
-
 end
