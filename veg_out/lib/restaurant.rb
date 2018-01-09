@@ -13,9 +13,8 @@ class VegOut::Restaurant
 
   @@all = []
 
-  def initialize(name = nil, distance = nil, address = nil, phone = nil, description = nil)
+  def initialize(name = nil, address = nil, phone = nil, description = nil)
     @name = name
-    @distance = distance
     @address = address
     @phone = phone
     @description = description
