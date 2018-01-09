@@ -40,10 +40,4 @@ class VegOut::Restaurant
         VegOut::CLI.start
     end
   end
-
-  def self.show_list
-    @restaurants.each_with_index.map {|n, index| puts "#{index - 1}. #{n} -- #{@distance[index]} away"}
-  end
-
-
 end

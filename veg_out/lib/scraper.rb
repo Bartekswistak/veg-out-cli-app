@@ -19,9 +19,11 @@ class VegOut::Scraper
     VegOut::Restaurant.new(
         @doc.css("h5").map {|name| name.text}.uniq,
         @doc.css("span.distance").map {|howfar| howfar.text}.uniq,
+        @deets.css("p.icon__text__desc").text.strip,
+        @deets.css("div.icon__text").children.css("span").first.text,
+        @deets.css("div.venue__description.mb--3").children.css("p").text
       )
-
-  end
+    end
 
   def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
