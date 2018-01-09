@@ -35,11 +35,7 @@ class VegOut::Scraper
       end
   end
 
-<<<<<<< HEAD
   def self.show_list
-=======
-  def show_list
->>>>>>> master
     @restaurants.each.with_index(1).map {|n, index| puts "#{index}. #{n} -- #{@distance[index]} away"}
   end
 

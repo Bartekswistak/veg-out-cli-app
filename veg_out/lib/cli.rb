@@ -8,11 +8,8 @@ require_relative './restaurant.rb'
 require_relative './enviro.rb'
 
 
-<<<<<<< HEAD
 class VegOut::CLI
 
-=======
->>>>>>> master
   def call
     puts "                    ------------------   "
     puts "                    Welcome to Veg Out   "
@@ -28,10 +25,8 @@ class VegOut::CLI
   def start
     puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
-<<<<<<< HEAD
     VegOut::Scraper.get_page
     VegOut::Scraper.scrape_results
-=======
     puts ""
     get_page
     show_restaurants
@@ -54,7 +49,6 @@ class VegOut::CLI
       show_list
       more_info
       end
->>>>>>> master
   end
 
   # This method takes user input to show more details of a specific restaurant or give options to navigate elsewhere.
@@ -75,33 +69,18 @@ class VegOut::CLI
           else
              puts ""
              puts "Not a valid choice"
-<<<<<<< HEAD
              self.more_info
-=======
-             puts ""
-             more_info
->>>>>>> master
           end
     end
 
     # The idea here is take user input, and take the appropriate link from details
     # and add it to the base site variable, from there more details will be scraped and displayed.
 
-<<<<<<< HEAD
     def self.show_details
       puts ""
       puts "Which restaurant are you interested in learing more about:"
       VegOut::Scraper.find_details_page
       VegOut::Scraper.more_details
       self.more_info
-=======
-    def show_details
-      puts ""
-      puts "Which restaurant are you interested in learning more about:"
-      puts ""
-      find_details_page
-      more_details
-      more_info
->>>>>>> master
     end
 end
