@@ -5,6 +5,8 @@ require 'open-uri'
 require_relative './restaurant.rb'
 require_relative './cli.rb'
 require_relative './enviro.rb'
+require_relative "./veg_out/version"
+
 
 class VegOut::Scraper
 
@@ -13,14 +15,12 @@ class VegOut::Scraper
     @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"))
   end
 
-  def create_restaurant
-    self.get_page.each do |item|
-
-      VegOut::Restaurant.new(
-        item.css("h5").map {|name| name.text}.uniq,
-        item.css("span.distance").map {|howfar| howfar.text}.uniq,
+  def self.create_restaurant
+    VegOut::Restaurant.new(
+        @doc.css("h5").map {|name| name.text}.uniq,
+        @doc.css("span.distance").map {|howfar| howfar.text}.uniq,
       )
-    end
+
   end
 
   def self.scrape_results

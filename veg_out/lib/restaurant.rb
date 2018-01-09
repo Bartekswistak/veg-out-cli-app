@@ -1,9 +1,15 @@
+require 'pry'
+require 'nokogiri'
+require 'open-uri'
+
 require_relative './cli.rb'
 require_relative './enviro.rb'
 require_relative "./veg_out/version"
+require_relative "./scraper"
 
 
-class Restaurant
+
+class VegOut::Restaurant
   attr_accessor :name, :distance, :address, :phone, :description
 
   @@all = []
@@ -19,6 +25,24 @@ class Restaurant
 
   def self.all
     @@all
+  end
+
+  def self.show_restaurants
+    if @restaurants != []
+        VegOut::Scraper.scrape_results
+        puts "Here are places with options to eat near you!!"
+        puts ""
+        VegOut::Scraper.show_list
+        VegOut::CLI.show_details
+    else
+        puts ""
+        puts "No nearby restaurants! Sorry!"
+        VegOut::CLI.start
+    end
+  end
+
+  def self.show_list
+    @restaurants.each_with_index.map {|n, index| puts "#{index - 1}. #{n} -- #{@distance[index]} away"}
   end
 
 

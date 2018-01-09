@@ -4,6 +4,9 @@ require 'open-uri'
 
 require_relative "./veg_out/version"
 require_relative "./scraper"
+require_relative './restaurant.rb'
+require_relative './enviro.rb'
+
 
 class VegOut::CLI
 
@@ -22,29 +25,29 @@ class VegOut::CLI
     puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
     VegOut::Scraper.get_page
-    show_restaurants
+    VegOut::Restaurant.show_restaurants
   end
 
   # This method scrapes the results page and gets an array of restaurants, then iterates over the array
   # and returns a numbered list with the distance from the location given.
 
-  def show_restaurants
-    if @restaurants != []
-        VegOut::Scraper.scrape_results
-        puts "Here are places with options to eat near you!!"
-        puts ""
-        VegOut::Scraper.show_list
-        show_details
-    else
-        puts ""
-        puts "No nearby restaurants! Sorry!"
-        start
-    end
-  end
+#  def show_restaurants
+#    if @restaurants != []
+#        VegOut::Restaurant.scrape_results
+#        puts "Here are places with options to eat near you!!"
+#        puts ""
+#        VegOut::Restaurant.show_list
+#        show_details
+#    else
+#        puts ""
+#        puts "No nearby restaurants! Sorry!"
+#        start
+#    end
+#  end
 
   # This method takes user input to show more details of a specific restaurant or give options to navigate elsewhere.
 
-  def more_info
+  def self.more_info
     puts ""
     puts "If you would like to see the list of restaurants again type 'list'"
     puts "Or to search a new area type 'back' or type 'quit' to exit "
@@ -56,22 +59,22 @@ class VegOut::CLI
           when "quit"
              exit
            when "list"
-             show_restaurants
+             VegOut::Restaurant.show_restaurants
           else
              puts ""
              puts "Not a valid choice"
-             more_info
+             self.more_info
           end
     end
 
     # The idea here is take user input, and take the appropriate link from details
     # and add it to the base site variable, from there more details will be scraped and displayed.
 
-    def show_details
+    def self.show_details
       puts ""
       puts "Which restaurant are you interested in learing more about:"
       VegOut::Scraper.find_details_page
       VegOut::Scraper.more_details
-      more_info
+      self.more_info
     end
 end
