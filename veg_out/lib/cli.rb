@@ -27,28 +27,6 @@ class VegOut::CLI
     puts "Please enter the name of your city, or a 5 digit zip code:"
     VegOut::Scraper.get_page
     VegOut::Scraper.scrape_results
-    puts ""
-    get_page
-    show_restaurants
-  end
-
-  # This method scrapes the results page and gets an array of restaurants, then iterates over the array
-  # and returns a numbered list with the distance from the location given.
-
-  def show_restaurants
-    scrape_results
-      if @restaurants == [ ]
-        puts ""
-        puts "No nearby restaurants! Sorry!"
-        puts ""
-        start
-      else
-        puts "-----------------------------------------------"
-        puts "Here are places with options to eat near you!!"
-        puts "-----------------------------------------------"
-      show_list
-      more_info
-      end
   end
 
   # This method takes user input to show more details of a specific restaurant or give options to navigate elsewhere.
