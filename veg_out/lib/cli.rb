@@ -29,16 +29,17 @@ class VegOut::CLI
   # and returns a numbered list with the distance from the location given.
 
   def show_restaurants
-    VegOut::Scraper.scrape_results
-      if @restaurants == [ ]
-        puts "No nearby restaurants! Sorry!"
-        start
-      else
+    if @restaurants != []
+        VegOut::Scraper.scrape_results
         puts "Here are places with options to eat near you!!"
         puts ""
-      VegOut::Scraper.show_list
-      show_details
-      end
+        VegOut::Scraper.show_list
+        show_details
+    else
+        puts ""
+        puts "No nearby restaurants! Sorry!"
+        start
+    end
   end
 
   # This method takes user input to show more details of a specific restaurant or give options to navigate elsewhere.

@@ -13,6 +13,16 @@ class VegOut::Scraper
     @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"))
   end
 
+  def create_restaurant
+    self.get_page.each do |item|
+
+      VegOut::Restaurant.new(
+        item.css("h5").map {|name| name.text}.uniq,
+        item.css("span.distance").map {|howfar| howfar.text}.uniq,
+      )
+    end
+  end
+
   def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
     @distance = @doc.css("span.distance").map {|howfar| howfar.text}.uniq
