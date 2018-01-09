@@ -17,13 +17,13 @@ class VegOut::Scraper
 
   def self.create_restaurant
     VegOut::Restaurant.new(
-      @name = @doc.css("h5").map {|name| name.text}.uniq,
+      @name = @deets.css("h1.header__title").text,
       @distance = @doc.css("span.distance").map {|howfar| howfar.text}.uniq,
       @address = @deets.css("p.icon__text__desc").text.strip,
       @phone = @deets.css("div.icon__text").children.css("span").first.text,
-      @distance = @deets.css("div.venue__description.mb--3").children.css("p").text
+      @description = @deets.css("div.venue__description.mb--3").children.css("p").text
       )
-    end
+  end
 
   def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
@@ -45,24 +45,26 @@ class VegOut::Scraper
         puts "Invalid choice. Select a number from the list above:"
         self.find_details_page
       else
-    details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
-    base_url = "https://www.happycow.net"
-    site = base_url << details[@info-1].to_s
-    @deets = Nokogiri::HTML(open(site))
+        details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
+        base_url = "https://www.happycow.net"
+        site = base_url << details[@info-1].to_s
+        @deets = Nokogiri::HTML(open(site))
+        self.more_details
       end
   end
 
   def self.more_details
+    self.create_restaurant
     puts ""
-    puts @deets.css("h1.header__title").text
+    puts @name
     puts ""
-    puts @deets.css("div.venue__description.mb--3").children.css("p").text
+    puts @description
     puts ""
     puts "Contact Info:"
-    puts @deets.css("div.icon__text").children.css("span").first.text
+    puts @phone
     puts ""
     puts "Location:"
-    puts @deets.css("p.icon__text__desc").text.strip
+    puts @address
     puts ""
   end
 end

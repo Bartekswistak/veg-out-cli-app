@@ -8,8 +8,6 @@ require_relative './enviro.rb'
 require_relative "./veg_out/version"
 
 
-
-
 class VegOut::Restaurant
   attr_accessor :name, :distance, :address, :phone, :description
 
@@ -28,11 +26,11 @@ class VegOut::Restaurant
     @@all
   end
 
-  def self.show_restaurants   
-      puts "Here are places with options to eat near you!!"
-      puts ""
-      VegOut::Scraper.show_list
-      VegOut::CLI.show_details
+  def self.show_restaurants
+    puts "Here are places with options to eat near you!!"
+    puts ""
+    VegOut::Scraper.show_list
+    VegOut::CLI.show_details
   end
 
   def self.retry
