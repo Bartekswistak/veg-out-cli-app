@@ -28,23 +28,6 @@ class VegOut::CLI
     VegOut::Restaurant.show_restaurants
   end
 
-  # This method scrapes the results page and gets an array of restaurants, then iterates over the array
-  # and returns a numbered list with the distance from the location given.
-
-#  def show_restaurants
-#    if @restaurants != []
-#        VegOut::Restaurant.scrape_results
-#        puts "Here are places with options to eat near you!!"
-#        puts ""
-#        VegOut::Restaurant.show_list
-#        show_details
-#    else
-#        puts ""
-#        puts "No nearby restaurants! Sorry!"
-#        start
-#    end
-#  end
-
   # This method takes user input to show more details of a specific restaurant or give options to navigate elsewhere.
 
   def self.more_info
@@ -55,7 +38,7 @@ class VegOut::CLI
       input = gets.strip
         case input
           when "back"
-             start
+            VegOut::CLI.new.start
           when "quit"
              exit
            when "list"
