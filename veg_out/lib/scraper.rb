@@ -20,7 +20,7 @@ class VegOut::Scraper
       @name = @deets.css("h1.header__title").text,
       @address = @deets.css("p.icon__text__desc").text.strip,
       @phone = @deets.css("div.icon__text").children.css("span").first.text,
-      @description = @deets.css("div.venue__description.mb--3").children.css("p").text
+      @description = @deets.css("div.venue__description.mb--3").children.css("p").text.gsub(/\s+/, " ").strip
       )
   end
 
