@@ -15,7 +15,7 @@ class VegOut::CLI
     puts "                    Welcome to Veg Out   "
     puts "                    ------------------   "
     puts ""
-    puts "The best place to find vegan and vegetarian restaurants!!"
+    puts "The best place to find vegan and vegetarian restaurants near you!!"
     puts ""
     start
   end
@@ -34,7 +34,7 @@ class VegOut::CLI
   def self.more_info
     puts ""
     puts "If you would like to see the list of restaurants again type 'list'"
-    puts "Or to search a new area type 'back' or type 'quit' to exit "
+    puts "To search a new area type 'back' or type 'quit' to exit "
     puts ""
       input = gets.strip
         case input
@@ -46,7 +46,7 @@ class VegOut::CLI
              VegOut::Restaurant.show_restaurants
           else
              puts ""
-             puts "Not a valid choice"
+             puts "Not a valid choice!"
              self.more_info
           end
     end
@@ -56,7 +56,7 @@ class VegOut::CLI
 
     def self.show_details
       puts ""
-      puts "Which restaurant are you interested in learing more about:"
+      puts "Which restaurant are you interested in learning more about:"
       VegOut::Scraper.find_details_page
       VegOut::Scraper.more_details
       self.more_info
