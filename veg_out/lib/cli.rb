@@ -59,6 +59,5 @@ class VegOut::CLI
       puts "Which restaurant are you interested in learning more about:"
       VegOut::Scraper.find_details_page
       VegOut::Scraper.more_details
-      self.more_info
     end
 end

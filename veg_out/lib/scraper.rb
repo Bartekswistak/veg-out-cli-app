@@ -26,7 +26,7 @@ class VegOut::Scraper
 
   def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
-    @distance = @doc.css("span.distance").each_with_index.map {|howfar, i| howfar.text if i.odd?}.uniq
+    @distance = @doc.css("span.distance").each_with_index.map {|d, i| d.text if i.odd?}.uniq
       if @restaurants != []
         VegOut::Restaurant.show_restaurants
       else
@@ -54,6 +54,7 @@ class VegOut::Scraper
 
   def self.more_details
     self.create_restaurant
+    puts ""
     (@name.length).times {print "~"}
     puts ""
     puts @name
@@ -67,5 +68,6 @@ class VegOut::Scraper
     puts "Location:"
     puts @address
     puts ""
+    VegOut::CLI.more_info
   end
 end
