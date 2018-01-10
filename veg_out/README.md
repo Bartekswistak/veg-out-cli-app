@@ -32,9 +32,9 @@ Or install it yourself as:
 
 After being greeted, user can input either city/state location or 5 digit zip code. If there are no
 restaurants in the area, user will be notified and asked for another area. Once an area has restaurants
-to show, a numbered list will be displayed with the distance from the location inputted. Next user has the options to type 'more' which will ask for the number of the restaurant user would like more info on.
-User can also type 'back' to search a new area, 'list' to show the list again of nearby restaurants or
-'quit' to exit the application. These options are available the moment of showing the list and at the moment of showing the details of a specific restaurant.
+to show, a numbered list will be displayed with the distance from the location inputted. Next user can select the number of the restaurant the user would like more information on.
+User can then type 'back' to search a new area, 'list' to show the list again of nearby restaurants or
+'quit' to exit the application. These options are available the moment of showing the details of a specific restaurant.
 
 ## Development
 
