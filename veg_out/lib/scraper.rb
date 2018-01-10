@@ -54,8 +54,10 @@ class VegOut::Scraper
 
   def self.more_details
     self.create_restaurant
+    (@name.length).times {print "~"}
     puts ""
     puts @name
+    (@name.length).times {print "~"}
     puts ""
     puts @description
     puts ""
