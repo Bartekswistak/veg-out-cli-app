@@ -26,7 +26,7 @@ class VegOut::Scraper
 
   def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
-    @distance = @doc.css("span.distance").map {|howfar| howfar.text}.uniq
+    @distance = @doc.css("span.distance").each_with_index.map {|howfar, i| howfar.text if i.odd?}.uniq
       if @restaurants != []
         VegOut::Restaurant.show_restaurants
       else
