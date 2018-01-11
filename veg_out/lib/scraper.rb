@@ -26,16 +26,12 @@ class VegOut::Scraper
 
   def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
-    @distance = @doc.css("span.distance").each_with_index.map {|d, i| d.text}
+    @distance = @doc.css("div.grid__group.js-venues").children.css("span.distance").map {|d| d.text}
       if @restaurants != []
         VegOut::CLI.show_restaurants
       else
         VegOut::CLI.retry
       end
-  end
-
-  def self.show_list
-    @restaurants.each.with_index(1).map {|n, index| puts "#{index}. #{n} -- #{@distance[index]} away"}
   end
 
   def self.find_details_page
@@ -50,5 +46,9 @@ class VegOut::Scraper
         @deets = Nokogiri::HTML(open(site))
         VegOut::CLI.more_details
       end
+  end
+
+  def self.show_list
+    @restaurants.each_with_index.map {|n, index| puts "#{index+1}. #{n} -- #{@distance[index]} away"}
   end
 end

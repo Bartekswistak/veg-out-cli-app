@@ -47,7 +47,7 @@ class VegOut::CLI
           when "quit"
              exit
           when "list"
-             VegOut::Restaurant.show_restaurants
+             self.show_restaurants
           else
              puts ""
              puts "Not a valid choice!"
