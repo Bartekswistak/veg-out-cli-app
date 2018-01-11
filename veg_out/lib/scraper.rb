@@ -26,11 +26,11 @@ class VegOut::Scraper
 
   def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
-    @distance = @doc.css("span.distance").each_with_index.map {|d, i| d.text if i.odd?}.uniq
+    @distance = @doc.css("span.distance").each_with_index.map {|d, i| d.text}
       if @restaurants != []
-        VegOut::Restaurant.show_restaurants
+        VegOut::CLI.show_restaurants
       else
-        VegOut::Restaurant.retry
+        VegOut::CLI.retry
       end
   end
 
@@ -48,26 +48,7 @@ class VegOut::Scraper
         base_url = "https://www.happycow.net"
         site = base_url << details[@info-1].to_s
         @deets = Nokogiri::HTML(open(site))
-        self.more_details
+        VegOut::CLI.more_details
       end
-  end
-
-  def self.more_details
-    self.create_restaurant
-    puts ""
-    (@name.length).times {print "~"}
-    puts ""
-    puts @name
-    (@name.length).times {print "~"}
-    puts ""
-    puts @description
-    puts ""
-    puts "Contact Info:"
-    puts @phone
-    puts ""
-    puts "Location:"
-    puts @address
-    puts ""
-    VegOut::CLI.more_info
   end
 end

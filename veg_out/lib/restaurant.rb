@@ -24,18 +24,4 @@ class VegOut::Restaurant
   def self.all
     @@all
   end
-
-  def self.show_restaurants
-    puts "----------------------------------------------"
-    puts "Here are places with options to eat near you!!"
-    puts "----------------------------------------------"
-    VegOut::Scraper.show_list
-    VegOut::CLI.show_details
-  end
-
-  def self.retry
-    puts ""
-    puts "No nearby restaurants! Sorry!"
-    VegOut::CLI.new.start
-  end
 end

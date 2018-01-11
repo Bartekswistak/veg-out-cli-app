@@ -20,8 +20,6 @@ class VegOut::CLI
     start
   end
 
-  # Takes the user input of either zip code or city/st or address and inserts into the url after the location tag
-
   def start
     puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
@@ -29,7 +27,13 @@ class VegOut::CLI
     VegOut::Scraper.scrape_results
   end
 
-  # This method takes user input to show more details of a specific restaurant or give options to navigate elsewhere.
+  def self.show_restaurants
+    puts "----------------------------------------------"
+    puts "Here are places with options to eat near you!!"
+    puts "----------------------------------------------"
+    VegOut::Scraper.show_list
+    self.show_details
+  end
 
   def self.more_info
     puts ""
@@ -51,13 +55,32 @@ class VegOut::CLI
           end
     end
 
-    # The idea here is take user input, and take the appropriate link from details
-    # and add it to the base site variable, from there more details will be scraped and displayed.
-
     def self.show_details
       puts ""
       puts "Which restaurant are you interested in learning more about:"
       VegOut::Scraper.find_details_page
-      VegOut::Scraper.more_details
+      self.more_details
+    end
+
+    def self.retry
+      puts ""
+      puts "No nearby restaurants! Sorry!"
+      VegOut::CLI.new.start
+    end
+
+    def self.more_details
+      VegOut::Scraper.create_restaurant
+      puts ""
+      puts @name
+      puts ""
+      puts @description
+      puts ""
+      puts "Contact Info:"
+      puts @phone
+      puts ""
+      puts "Location:"
+      puts @address
+      puts ""
+      self.more_info
     end
 end
