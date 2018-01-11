@@ -31,7 +31,7 @@ class VegOut::CLI
     puts "----------------------------------------------"
     puts "Here are places with options to eat near you!!"
     puts "----------------------------------------------"
-    VegOut::Scraper.show_list
+    VegOut::Scraper.create_list
     self.show_details
   end
 
