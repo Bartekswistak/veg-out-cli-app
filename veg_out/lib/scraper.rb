@@ -15,7 +15,7 @@ class VegOut::Scraper
     @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"))
   end
 
-  def self.create_restaurant
+  def self.create_restaurant(name = nil, address = nil, phone = nil, description = nil)
     VegOut::Restaurant.new(
       @name = @deets.css("h1.header__title").text,
       @address = @deets.css("p.icon__text__desc").text.strip,
@@ -44,7 +44,6 @@ class VegOut::Scraper
         base_url = "https://www.happycow.net"
         site = base_url << details[@info-1].to_s
         @deets = Nokogiri::HTML(open(site))
-        VegOut::CLI.more_details
       end
   end
 

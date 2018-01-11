@@ -69,17 +69,16 @@ class VegOut::CLI
     end
 
     def self.more_details
-      VegOut::Scraper.create_restaurant
       puts ""
-      puts @name
+      puts VegOut::Scraper.create_restaurant.name
       puts ""
-      puts @description
+      puts VegOut::Scraper.create_restaurant.description
       puts ""
       puts "Contact Info:"
-      puts @phone
+      puts VegOut::Scraper.create_restaurant.phone
       puts ""
       puts "Location:"
-      puts @address
+      puts VegOut::Scraper.create_restaurant.address
       puts ""
       self.more_info
     end
