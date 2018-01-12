@@ -43,9 +43,7 @@ class VegOut::Scraper
         self.find_details_page
       else
         details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
-        base_url = "https://www.happycow.net"
-        site = base_url << details[info-1].to_s
-        @deets = Nokogiri::HTML(open(site))
+        @deets = Nokogiri::HTML(open("https://www.happycow.net" << details[info-1].to_s))
         self.more_details
       end
   end
