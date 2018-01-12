@@ -23,6 +23,7 @@ class VegOut::CLI
   def start
     puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
+
     VegOut::Scraper.get_page
     VegOut::Scraper.scrape_results
   end
@@ -31,6 +32,7 @@ class VegOut::CLI
     puts "----------------------------------------------"
     puts "Here are places with options to eat near you!!"
     puts "----------------------------------------------"
+
     VegOut::Scraper.create_list
     self.show_details
   end
@@ -40,19 +42,20 @@ class VegOut::CLI
     puts "If you would like to see the list of restaurants again type 'list'"
     puts "To search a new area type 'back' or type 'quit' to exit "
     puts ""
-      input = gets.strip
-        case input
-          when "back"
-            VegOut::CLI.new.start
-          when "quit"
-             exit
-          when "list"
-             self.show_restaurants
-          else
-             puts ""
-             puts "Not a valid choice!"
-             self.more_info
-          end
+
+    input = gets.strip
+      case input
+        when "back"
+          VegOut::CLI.new.start
+        when "quit"
+          exit
+        when "list"
+          self.show_restaurants
+        else
+          puts ""
+          puts "Not a valid choice!"
+          self.more_info
+        end
     end
 
     def self.show_details

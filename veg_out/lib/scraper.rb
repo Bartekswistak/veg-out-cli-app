@@ -27,6 +27,7 @@ class VegOut::Scraper
   def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
     @distance = @doc.css("div.grid__group.js-venues").children.css("span.distance").map {|d| d.text}
+
       if @restaurants != []
         VegOut::CLI.show_restaurants
       else
@@ -36,6 +37,7 @@ class VegOut::Scraper
 
   def self.find_details_page
     info = gets.strip.to_i
+
       if info > @restaurants.size
         puts "Invalid choice. Select a number from the list above:"
         self.find_details_page
