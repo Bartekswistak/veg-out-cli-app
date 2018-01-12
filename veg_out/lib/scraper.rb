@@ -44,7 +44,24 @@ class VegOut::Scraper
         base_url = "https://www.happycow.net"
         site = base_url << details[@info-1].to_s
         @deets = Nokogiri::HTML(open(site))
+        self.more_details
       end
+  end
+
+  def self.more_details
+    self.create_restaurant
+    puts ""
+    puts @name
+    puts ""
+    puts @description
+    puts ""
+    puts "Contact Info:"
+    puts @phone
+    puts ""
+    puts "Location:"
+    puts @address
+    puts ""
+    VegOut::CLI.more_info
   end
 
   def self.create_list

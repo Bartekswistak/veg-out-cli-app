@@ -59,27 +59,11 @@ class VegOut::CLI
       puts ""
       puts "Which restaurant are you interested in learning more about:"
       VegOut::Scraper.find_details_page
-      self.more_details
     end
 
     def self.retry
       puts ""
       puts "No nearby restaurants! Sorry!"
       VegOut::CLI.new.start
-    end
-
-    def self.more_details
-      puts ""
-      puts VegOut::Scraper.create_restaurant.name
-      puts ""
-      puts VegOut::Scraper.create_restaurant.description
-      puts ""
-      puts "Contact Info:"
-      puts VegOut::Scraper.create_restaurant.phone
-      puts ""
-      puts "Location:"
-      puts VegOut::Scraper.create_restaurant.address
-      puts ""
-      self.more_info
     end
 end
