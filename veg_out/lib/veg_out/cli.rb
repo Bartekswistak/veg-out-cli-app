@@ -18,12 +18,13 @@ class VegOut::CLI
     VegOut::Scraper.scrape_results
   end
 
-  def self.show_restaurants
+  def self.create_list
     puts "----------------------------------------------"
     puts "Here are places with options to eat near you!!"
     puts "----------------------------------------------"
 
-    VegOut::Scraper.create_list
+    @restaurants.each_with_index.map {|n, index| puts "#{index+1}. #{n} -- #{@distance[index]} away"}
+
     self.show_details
   end
 

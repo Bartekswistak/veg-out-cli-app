@@ -19,7 +19,7 @@ class VegOut::Scraper
     @distance = @doc.css("div.grid__group.js-venues").children.css("span.distance").map {|d| d.text}
 
       if @restaurants != []
-        VegOut::CLI.show_restaurants
+        VegOut::CLI.create_list
       else
         VegOut::CLI.retry
       end
@@ -57,7 +57,7 @@ class VegOut::Scraper
     VegOut::CLI.more_info
   end
 
-  def self.create_list
-    @restaurants.each_with_index.map {|n, index| puts "#{index+1}. #{n} -- #{@distance[index]} away"}
-  end
+#  def self.create_list
+#    @restaurants.each_with_index.map {|n, index| puts "#{index+1}. #{n} -- #{@distance[index]} away"}
+#  end
 end
