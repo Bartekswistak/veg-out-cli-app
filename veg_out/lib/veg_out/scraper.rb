@@ -3,6 +3,7 @@ class VegOut::Scraper
   def self.get_page
     input = gets.strip.to_s
     @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"))
+    self.scrape_results
   end
 
   def self.create_restaurant(name = nil, address = nil, phone = nil, description = nil)

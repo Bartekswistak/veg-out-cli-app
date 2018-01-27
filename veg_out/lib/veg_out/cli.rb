@@ -1,27 +1,31 @@
 class VegOut::CLI
 
   def call
-    puts "                    ------------------   "
-    puts "                    Welcome to Veg Out   "
-    puts "                    ------------------   "
-    puts ""
-    puts "The best place to find vegan and vegetarian restaurants near you!!"
-    puts ""
-    start
+    puts <<~eos
+
+                        ------------------
+                        Welcome to Veg Out
+                        ------------------
+
+     The best place to find vegan and vegetarian restaurants near you!!
+
+     eos
+     start
   end
 
   def start
-    puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
 
     VegOut::Scraper.get_page
-    VegOut::Scraper.scrape_results
   end
 
   def self.create_list
-    puts "----------------------------------------------"
-    puts "Here are places with options to eat near you!!"
-    puts "----------------------------------------------"
+    puts <<~eos
+
+      ----------------------------------------------
+      Here are places with options to eat near you!!
+      ----------------------------------------------
+    eos
 
     @restaurants.each_with_index.map {|n, index| puts "#{index+1}. #{n} -- #{@distance[index]} away"}
 
@@ -29,10 +33,11 @@ class VegOut::CLI
   end
 
   def self.more_info
-    puts ""
-    puts "If you would like to see the list of restaurants again type 'list'"
-    puts "To search a new area type 'back' or type 'quit' to exit "
-    puts ""
+    puts <<~eos
+      If you would like to see the list of restaurants again type 'list'
+      To search a new area type 'back' or type 'quit' to exit
+    eos
+
 
     input = gets.strip
       case input
@@ -41,7 +46,7 @@ class VegOut::CLI
         when "quit"
           exit
         when "list"
-          self.show_restaurants
+          self.create_list
         else
           puts ""
           puts "Not a valid choice!"
