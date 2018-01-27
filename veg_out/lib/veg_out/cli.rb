@@ -14,6 +14,7 @@ class VegOut::CLI
   end
 
   def start
+    puts ""
     puts "Please enter the name of your city, or a 5 digit zip code:"
 
     VegOut::Scraper.get_page
@@ -25,7 +26,7 @@ class VegOut::CLI
       ----------------------------------------------
       Here are places with options to eat near you!!
       ----------------------------------------------
-      
+
     eos
 
     VegOut::Scraper::restaurants.each_with_index.map {|n, index| puts "#{index+1}. #{n} -- #{VegOut::Scraper::distance[index]} away" }
@@ -38,7 +39,6 @@ class VegOut::CLI
       If you would like to see the list of restaurants again type 'list'
       To search a new area type 'back' or type 'quit' to exit
     eos
-
 
     input = gets.strip
       case input
@@ -59,6 +59,25 @@ class VegOut::CLI
       puts ""
       puts "Which restaurant are you interested in learning more about:"
       VegOut::Scraper.find_details_page
+    end
+
+    def self.more_details
+      VegOut::Scraper.create_restaurant
+
+      VegOut::Scraper::name.size.times {print "~"}
+      puts ""
+      puts VegOut::Scraper::name
+      VegOut::Scraper::name.size.times {print "~"}
+      puts ""
+      puts VegOut::Scraper::description
+      puts ""
+      puts "Contact Info:"
+      puts VegOut::Scraper::phone
+      puts ""
+      puts "Location:"
+      puts VegOut::Scraper::address
+      puts ""
+      self.more_info
     end
 
     def self.retry

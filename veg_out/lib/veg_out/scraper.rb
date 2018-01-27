@@ -13,6 +13,9 @@ class VegOut::Scraper
       @phone = @deets.css("div.icon__text").children.css("span").first.text,
       @description = @deets.css("div.venue__description.mb--3").children.css("p").text.gsub(/\s+/, " ").strip
       )
+      class << self
+        attr_accessor :name, :address, :phone, :description
+      end
   end
 
   def self.scrape_results
@@ -38,30 +41,7 @@ class VegOut::Scraper
       else
         details = @doc.css("div.thumbnail__box a").map {|link| link['href']}.uniq
         @deets = Nokogiri::HTML(open("https://www.happycow.net" << details[info-1].to_s))
-        self.more_details
+        VegOut::CLI.more_details
       end
   end
-
-  def self.more_details
-    self.create_restaurant
-
-    @name.size.times {print "~"}
-    puts ""
-    puts @name
-    @name.size.times {print "~"}
-    puts ""
-    puts @description
-    puts ""
-    puts "Contact Info:"
-    puts @phone
-    puts ""
-    puts "Location:"
-    puts @address
-    puts ""
-    VegOut::CLI.more_info
-  end
-
-#  def self.create_list
-#    @restaurants.each_with_index.map {|n, index| puts "#{index+1}. #{n} -- #{@distance[index]} away"}
-#  end
 end
