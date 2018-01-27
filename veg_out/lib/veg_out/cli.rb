@@ -1,13 +1,3 @@
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
-
-require_relative "./veg_out/version"
-require_relative "./scraper"
-require_relative './restaurant.rb'
-require_relative './enviro.rb'
-
-
 class VegOut::CLI
 
   def call

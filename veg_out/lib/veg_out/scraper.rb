@@ -1,13 +1,3 @@
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
-
-require_relative './restaurant.rb'
-require_relative './cli.rb'
-require_relative './enviro.rb'
-require_relative "./veg_out/version"
-
-
 class VegOut::Scraper
 
   def self.get_page
@@ -36,9 +26,9 @@ class VegOut::Scraper
   end
 
   def self.find_details_page
-    info = gets.strip.to_i
+    info = gets.strip
 
-      if info > @restaurants.size
+      if info.to_i > @restaurants.size || info.is_a?(String)
         puts "Invalid choice. Select a number from the list above:"
         self.find_details_page
       else
