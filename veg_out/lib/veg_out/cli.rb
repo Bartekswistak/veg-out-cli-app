@@ -25,9 +25,10 @@ class VegOut::CLI
       ----------------------------------------------
       Here are places with options to eat near you!!
       ----------------------------------------------
+      
     eos
 
-    @restaurants.each_with_index.map {|n, index| puts "#{index+1}. #{n} -- #{@distance[index]} away"}
+    VegOut::Scraper::restaurants.each_with_index.map {|n, index| puts "#{index+1}. #{n} -- #{VegOut::Scraper::distance[index]} away" }
 
     self.show_details
   end

@@ -18,6 +18,9 @@ class VegOut::Scraper
   def self.scrape_results
     @restaurants = @doc.css("h5").map {|name| name.text}.uniq
     @distance = @doc.css("div.grid__group.js-venues").children.css("span.distance").map {|d| d.text}
+    class << self
+      attr_accessor :restaurants, :distance
+    end
 
       if @restaurants != []
         VegOut::CLI.create_list
