@@ -32,7 +32,7 @@ Or install it yourself as:
 
     $ gem install veg_out
 
-Once gem is installed, change directory to the veg_out folder, then type veg-out to run the gem!
+Once gem is installed, simply type veg-out to run the gem!
 
 ## Usage
 
