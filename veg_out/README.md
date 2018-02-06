@@ -14,6 +14,10 @@ Source website I will be scraping from is HappyCow.com
 
 ## Installation
 
+Clone from GitHub using the following command in your terminal ==>
+  git clone git@github.com:Bartekswistak/veg-out-cli-app.git
+
+
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -29,6 +33,8 @@ Or install it yourself as:
     $ gem install veg_out
 
 ## Usage
+
+To run the program from the directory: type " ruby veg_out/bin/veg-out " in your terminal and follow instructions.
 
 After being greeted, user can input either city/state location or 5 digit zip code. If there are no
 restaurants in the area, user will be notified and asked for another area. Once an area has restaurants
