@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/Bartekswistak/veg-out-cli-app"
   spec.license       = "MIT"
 
-  spec.files         = ["lib/veg_out/cli.rb", "lib/veg_out/scraper.rb", "lib/veg_out/restaurant.rb", "lib/enviro.rb"]
+  spec.files         = ["lib/veg_out/cli.rb", "lib/veg_out/scraper.rb", "lib/veg_out/restaurant.rb", "lib/enviro.rb", "lib/veg_out/version.rb"]
   spec.bindir        = "bin"
   spec.executables   << "veg-out"
   spec.require_paths = ["lib"]
