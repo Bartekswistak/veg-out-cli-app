@@ -2,13 +2,13 @@ class VegOut::Scraper
 
   def self.get_page
     input = gets.strip.to_s
-    @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?lat=&lng=&location=#{input}&vegan=true&vegetarian=true&vegfriendly=true&distance=20&distanceType=mi&limit=25"))
+    @doc = Nokogiri::HTML(open("https://www.happycow.net/searchmap?location=#{input}&filters=vegan-vegetarian-vegfriendly&radius=15&metric=mi&limit=81&order=default&lat=55.7558&lng=37.6173"))
     self.scrape_results
   end
 
   def self.create_restaurant(name = nil, address = nil, phone = nil, description = nil)
     VegOut::Restaurant.new(
-      @name = @deets.css("h1.header__title").text,
+      @name = @deets.css("h4.overlay__title").text,
       @address = @deets.css("p.icon__text__desc").text.strip,
       @phone = @deets.css("div.icon__text").children.css("span").first.text,
       @description = @deets.css("div.venue__description.mb--3").children.css("p").text.gsub(/\s+/, " ").strip
